@@ -1,4 +1,5 @@
 //*in bubble Sort we compare 1st element with right adjacent and then 2nd element to its right adjacent and so on.
+//!like that the LAST ELEMENT in the array will be LARGEST after each iteration.
 
 function bubbleSort(array) {
     for (let i = array.length - 1; i > 0; i--) {
