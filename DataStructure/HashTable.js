@@ -1,8 +1,9 @@
-//!Separete Chaining
-//*In the collision, the process of putting arrays in same address space is called Separete Chaining.
+//!Separate Chaining
+//*In the collision, the process of putting arrays in same address space is called Separate Chaining.
 //!Linear Probing
 //*If its Open addressing then Linear Probing is used so when there is already an array in on address next address will be allocated if not occupied.
 //*Size= 7 is the default value if not specified
+//!hash function is BigO(1). hash function is very efficient in randomizing positions so get method will be BigO(1) instead of O(n)
 
 class HashTable {
     constructor(size = 7) {
@@ -52,4 +53,4 @@ newHashTable.set("bolts", 1400);
 newHashTable.set("washers", 50);
 newHashTable.set("nails", 1220);
 newHashTable.set("nuts", 1400);
-console.log(newHashTable.get("washers"));
+console.log(newHashTable.keys());
