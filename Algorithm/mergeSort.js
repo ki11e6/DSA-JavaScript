@@ -1,4 +1,7 @@
-function mergeSort(arr1, arr2) {
+//!space Complexity increases as we break down the array so O(n).
+//!Time Complexity , when we break down it is O(logn) operation and when we put them back together is O(n). So together we get O(n log n)
+
+function mergeCombine(arr1, arr2) {
     let combined = [];
     let i = 0;
     let j = 0;
@@ -22,4 +25,14 @@ function mergeSort(arr1, arr2) {
     return combined;
 }
 
-console.log(mergeSort([1, 3, 7, 8], [2, 4, 5, 6]));
+function mergeSort(array) {
+    if (array.length === 1) return array;
+    let mid = Math.floor(array.length / 2);
+    let left = array.slice(0, mid);
+    let right = array.slice(mid);
+    return mergeCombine(mergeSort(left), mergeSort(right));
+}
+
+array = [3, 1, 4, 2, 9, 0, 5, 2];
+
+console.log(mergeSort(array));
