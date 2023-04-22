@@ -42,4 +42,4 @@ myStack.push(2);
 myStack.push(32);
 myStack.push(62);
 myStack.pop();
-console.log(myStack);
+console.log(myStack.top);

@@ -4,8 +4,11 @@ function insertionSort(array) {
         temp = array[i];
         for (var j = i - 1; j > -1 && array[j] > temp; j--) {
             array[j + 1] = array[j];
+            console.log(array);
         }
+        console.log("loop" + i);
         array[j + 1] = temp;
+        console.log(array);
     }
     return array;
 }
