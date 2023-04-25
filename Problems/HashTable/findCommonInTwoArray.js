@@ -1,3 +1,5 @@
+//! Find if there is any common items in give 2 arrays
+
 function itemInCommon(arr1, arr2) {
     let obj = {};
     for (let i = 0; i < arr1.length; i++) {
@@ -11,4 +13,4 @@ function itemInCommon(arr1, arr2) {
     return false;
 }
 
-console.log(itemInCommon([1, 2, 3], [6, 7, 4, 33]));
+console.log(itemInCommon([1, 2, 3, 6], [6, 7, 4, 33]));

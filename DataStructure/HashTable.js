@@ -12,6 +12,7 @@ class HashTable {
     _hash(key) {
         let hash = 0;
         for (let i = 0; i < key.length; i++) {
+            //charCodeAt will give give utf-16 0-65535
             hash = (hash + key.charCodeAt(i) * 23) % this.dataMap.length;
         }
         return hash;
@@ -49,8 +50,8 @@ class HashTable {
 }
 
 let newHashTable = new HashTable();
-newHashTable.set("bolts", 1400);
-newHashTable.set("washers", 50);
-newHashTable.set("nails", 1220);
-newHashTable.set("nuts", 1400);
+newHashTable.set('bolts', 1400);
+newHashTable.set('washers', 50);
+newHashTable.set('nails', 1220);
+newHashTable.set('nuts', 1400);
 console.log(newHashTable.keys());
