@@ -48,7 +48,82 @@ class BinarySearchTree {
         }
         return false;
     }
-    bfs() {
+
+    remove(value) {
+        if (!this.root) return undefined;
+        let currentNode = this.root;
+        let parentNode = null;
+        while (currentNode) {
+            if (value < currentNode.value) {
+                parentNode = currentNode;
+                currentNode = currentNode.left;
+            } else if (value > currentNode.value) {
+                parentNode = currentNode;
+                currentNode = currentNode.right;
+            } else if (currentNode.value === value) {
+                //we found a match
+                //option 1:No right child
+                if (currentNode.right === null) {
+                    if (parentNode == null) {
+                        this.root = currentNode.left;
+                    } else {
+                        //if parent >current value ,make  current left child a child of parent
+                        if (currentNode.value < parentNode.value) {
+                            parentNode.left = currentNode.left;
+                        }
+                        //if parent < current value, make left child a right child of parent
+                        else if (currentNode.value > parentNode.value) {
+                            parentNode.right = currentNode.left;
+                        }
+                    }
+                }
+                //Option 2: Right child which doesnt have a left child
+                else if (currentNode.right.left === null) {
+                    currentNode.right.left = currentNode.left;
+                    if (parentNode === null) {
+                        this.root = currentNode.right;
+                    } else {
+                        //if parent > current, make right child of the left the parent
+                        if (currentNode.value < parentNode.value) {
+                            parentNode.left = currentNode.right;
+                        }
+                        //if parent < current, make right child a right child of the parent
+                        else if (currentNode.value > parentNode.value) {
+                            parentNode.right = currentNode.right;
+                        }
+                    }
+                }
+                //option 3: right child that has a left child
+                else {
+                    //find the right child's left most child
+                    let leftmost = currentNode.right.left;
+                    let leftmostParent = currentNode.right;
+                    while (leftmost.left !== null) {
+                        leftmostParent = leftmost;
+                        leftmost = leftmost.left;
+                    }
+                    //Parent's left subtree is now leftmost's right subtree
+                    leftmostParent.left = leftmost.right;
+                    leftmost.left = currentNode.left;
+                    leftmost.right = currentNode.right;
+                    if (parentNode === null) {
+                        this.root = leftmost;
+                    } else {
+                        if (currentNode < parentNode.value) {
+                            parentNode.left = leftmost;
+                        } else if (currentNode.value > parentNode.value) {
+                            parentNode.right = leftmost;
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+    }
+
+    //*BREADTH FIRST SEARCH
+
+    BFS() {
         let currentNode = this.root;
         let queue = [];
         let results = [];
@@ -61,17 +136,52 @@ class BinarySearchTree {
         }
         return results;
     }
+
+    //*Depth First Search Preorder
+    DFSpreorder() {
+        let results = [];
+        function traverse(currentNode) {
+            results.push(currentNode.value);
+            if (currentNode.left) traverse(currentNode.left);
+            if (currentNode.right) traverse(currentNode.right);
+        }
+        traverse(this.root);
+        return results;
+    }
+
+    //*Depth First Search Postorder
+    DFSPostorder() {
+        let results = [];
+        function traverse(currentNode) {
+            if (currentNode.left) traverse(currentNode.left);
+            if (currentNode.right) traverse(currentNode.right);
+            results.push(currentNode.value);
+        }
+        traverse(this.root);
+        return results;
+    }
+
+    //*Depth First Search InOrder
+    DFSInOrder() {
+        let results = [];
+        function traverse(currentNode) {
+            if (currentNode.left) traverse(currentNode.left);
+            results.push(currentNode.value);
+            if (currentNode.right) traverse(currentNode.right);
+        }
+        traverse(this.root);
+        return results;
+    }
 }
 
 let myTree = new BinarySearchTree();
-myTree.insert(47);
-myTree.insert(21);
-myTree.insert(76);
-myTree.insert(18);
-myTree.insert(27);
-myTree.insert(52);
-myTree.insert(82);
+myTree.insert(3);
+myTree.insert(1);
 myTree.insert(2);
-x = myTree.contains(52);
-y = myTree.bfs();
-console.log(y);
+myTree.insert(4);
+myTree.insert(9);
+myTree.insert(5);
+console.log('BFS', myTree.BFS());
+console.log('DFS preorder', myTree.DFSpreorder());
+console.log('DFS postorder', myTree.DFSPostorder());
+console.log('DFS InOrder', myTree.DFSInOrder());
