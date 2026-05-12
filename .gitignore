@@ -1,1 +1,5 @@
 test.js
+logs/
+*.mp4
+node_modules/
+.DS_Store
